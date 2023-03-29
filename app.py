@@ -36,11 +36,12 @@ for i in sorted_alphanumeric(glob(outputpath+f'/{inputpath}_dir/*')):
     # Send the API request
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0301", messages=[{"role": "user", "content": prompt}])
     explainations.append(response['choices'][0]['message']['content'])
+    print(i)
 
 with open("ocr.txt", 'w') as output:
-    for row in ocrs:
-        output.write(str(row) + '\n'+ '--------------------------------'+ '\n')
+    for idx, row in enumerate(ocrs):
+        output.write(str(idx+1)+') '+ str(row) +  '\n' + ' --------------------------------'+ '\n')
 
 with open("explainations.txt", 'w') as output:
-    for row in explainations:
-        output.write(str(row) + '\n'+ '--------------------------------'+ '\n')
+    for idx, row in enumerate(explainations):
+        output.write(str(idx+1)+') '+ str(row) +  '\n' + ' --------------------------------'+ '\n')
